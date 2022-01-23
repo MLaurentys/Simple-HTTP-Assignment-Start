@@ -1,13 +1,11 @@
 const fs = require('fs');
 
-const filename = './client/spongegar.png';
+const image = fs.readFileSync(`${__dirname}/../client/spongegar.png`);
 
 function getImage(req, res) {
   res.writeHead(200, { 'Content-Type': 'image/png' });
-  const stream = fs.createReadStream(filename);
-  stream.on('open', () => {
-    stream.pipe(res);
-  });
+  res.write(image);
+  res.end();
 }
 
 module.exports.getImage = getImage;
